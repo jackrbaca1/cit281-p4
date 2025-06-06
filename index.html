@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIT 281 Project 4: RESTful API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        .endpoint {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .method {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get { background-color: #2ecc71; }
+        .post { background-color: #3498db; }
+        .put { background-color: #f39c12; }
+        .delete { background-color: #e74c3c; }
+        .github-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .github-link:hover {
+            background-color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <h1>CIT 281 Project 4: RESTful API</h1>
+    
+    <p>This is a simple RESTful API for managing questions and answers. The API is built with Node.js and provides endpoints for CRUD operations.</p>
+    
+    <h2>API Documentation</h2>
+    
+    <div class="endpoint">
+        <h3>Get All Questions</h3>
+        <p><span class="method get">GET</span> <code>/cit/question</code></p>
+        <p>Returns an array of all questions.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Get All Answers</h3>
+        <p><span class="method get">GET</span> <code>/cit/answer</code></p>
+        <p>Returns an array of all answers.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Get All Questions and Answers</h3>
+        <p><span class="method get">GET</span> <code>/cit/questionanswer</code></p>
+        <p>Returns an array of all question-answer pairs.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Get a Specific Question by ID</h3>
+        <p><span class="method get">GET</span> <code>/cit/question/:id</code></p>
+        <p>Returns a specific question by its ID.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Get a Specific Answer by ID</h3>
+        <p><span class="method get">GET</span> <code>/cit/answer/:id</code></p>
+        <p>Returns a specific answer by its ID.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Get a Specific Question-Answer Pair by ID</h3>
+        <p><span class="method get">GET</span> <code>/cit/questionanswer/:id</code></p>
+        <p>Returns a specific question-answer pair by its ID.</p>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Add a New Question-Answer Pair</h3>
+        <p><span class="method post">POST</span> <code>/cit/questionanswer</code></p>
+        <p>Adds a new question-answer pair.</p>
+        <p>Example request body:</p>
+        <pre>{
+  "question": "What is Node.js?",
+  "answer": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine."
+}</pre>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Update a Question-Answer Pair</h3>
+        <p><span class="method put">PUT</span> <code>/cit/questionanswer/:id</code></p>
+        <p>Updates an existing question-answer pair.</p>
+        <p>Example request body:</p>
+        <pre>{
+  "question": "What is Node.js?",
+  "answer": "Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser."
+}</pre>
+    </div>
+    
+    <div class="endpoint">
+        <h3>Delete a Question-Answer Pair</h3>
+        <p><span class="method delete">DELETE</span> <code>/cit/questionanswer/:id</code></p>
+        <p>Deletes a question-answer pair by its ID.</p>
+    </div>
+    
+    <a href="https://github.com/jackrbaca1/cit281-p4" class="github-link" target="_blank">View on GitHub</a>
+    
+    <h2>Running the Server Locally</h2>
+    <p>To run this server locally:</p>
+    <pre># Install dependencies
+npm install
+
+# Start the server
+node p4-server.js</pre>
+    
+    <p>The server will be available at <code>http://localhost:3000</code></p>
+</body>
+</html>
