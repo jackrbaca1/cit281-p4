@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIT 281 Project 4 - RESTful API Documentation</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .endpoint {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .endpoint-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .method {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .method.get { background-color: #d4edff; color: #1a73e8; }
+        .method.post { background-color: #d5f5e3; color: #0d8040; }
+        .method.patch { background-color: #fef5cd; color: #c05621; }
+        .method.delete { background-color: #fae0e0; color: #c53030; }
+        
+        .endpoint-path {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            margin-left: 1rem;
+        }
+        
+        .endpoint-description {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .endpoint-example {
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+        }
+        
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-top: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .response-codes h3 {
+            margin: 1.5rem 0 1rem;
+            color: var(--dark-color);
+        }
+        
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .endpoint-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .method {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>CIT 281 Project 4</h1>
+            <p>RESTful API Documentation</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2>Introduction</h2>
+            <p>This is a RESTful API for managing questions and answers. The API provides endpoints to create, read, update, and delete questions and answers.</p>
+            <p><strong>Base URL:</strong> <code class="code">/api</code></p>
+        </section>
+
+        <section class="section">
+            <h2>Questions</h2>
+            
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/questions</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Get all questions</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>GET /api/questions</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "results": 3,
+  "data": {
+    "questions": [
+      { "id": 1, "question": "What is Node.js?" },
+      { "id": 2, "question": "What is Express?" },
+      { "id": 3, "question": "What is REST?" }
+    ]
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/questions/:id</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Get a specific question by ID</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>GET /api/questions/1</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": {
+    "question": {
+      "id": 1,
+      "question": "What is Node.js?"
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/api/questions</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Create a new question</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>POST /api/questions
+Content-Type: application/json
+
+{
+  "question": "What is MongoDB?"
+}</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": {
+    "question": {
+      "id": 4,
+      "question": "What is MongoDB?"
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method patch">PATCH</span>
+                    <span class="endpoint-path">/api/questions/:id</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Update a question</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>PATCH /api/questions/1
+Content-Type: application/json
+
+{
+  "question": "What is Node.js runtime?"
+}</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": {
+    "question": {
+      "id": 1,
+      "question": "What is Node.js runtime?"
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method delete">DELETE</span>
+                    <span class="endpoint-path">/api/questions/:id</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Delete a question</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>DELETE /api/questions/1</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": null
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Answers</h2>
+            
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/answers</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Get all answers</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>GET /api/answers</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "results": 3,
+  "data": {
+    "answers": [
+      { "id": 1, "answer": "Node.js is a JavaScript runtime..." },
+      { "id": 2, "answer": "Express is a minimal and flexible..." },
+      { "id": 3, "answer": "REST (Representational State Transfer)..." }
+    ]
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method get">GET</span>
+                    <span class="endpoint-path">/api/answers/:id</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Get a specific answer by ID</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>GET /api/answers/1</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": {
+    "answer": {
+      "id": 1,
+      "answer": "Node.js is a JavaScript runtime..."
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method post">POST</span>
+                    <span class="endpoint-path">/api/answers</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Create a new answer</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>POST /api/answers
+Content-Type: application/json
+
+{
+  "answer": "MongoDB is a NoSQL database..."
+}</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": {
+    "answer": {
+      "id": 4,
+      "answer": "MongoDB is a NoSQL database..."
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method patch">PATCH</span>
+                    <span class="endpoint-path">/api/answers/:id</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Update an answer</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>PATCH /api/answers/1
+Content-Type: application/json
+
+{
+  "answer": "Node.js is a JavaScript runtime built on Chrome's V8 engine..."
+}</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": {
+    "answer": {
+      "id": 1,
+      "answer": "Node.js is a JavaScript runtime built on Chrome's V8 engine..."
+    }
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <div class="endpoint-header">
+                    <span class="method delete">DELETE</span>
+                    <span class="endpoint-path">/api/answers/:id</span>
+                </div>
+                <div class="endpoint-description">
+                    <p>Delete an answer</p>
+                </div>
+                <div class="endpoint-example">
+                    <h3>Example Request</h3>
+                    <pre>DELETE /api/answers/1</pre>
+                    
+                    <h3>Example Response</h3>
+                    <pre>{
+  "status": "success",
+  "data": null
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="section response-codes">
+            <h2>Response Status Codes</h2>
+            <p>The API uses the following status codes:</p>
+            
+            <h3>Success</h3>
+            <ul>
+                <li><strong>200 OK</strong> - The request was successful</li>
+                <li><strong>201 Created</strong> - A new resource was created</li>
+                <li><strong>204 No Content</strong> - The request was successful but there is no content to return</li>
+            </ul>
+            
+            <h3>Client Errors</h3>
+            <ul>
+                <li><strong>400 Bad Request</strong> - The request was invalid or cannot be served</li>
+                <li><strong>401 Unauthorized</strong> - Authentication is required</li>
+                <li><strong>403 Forbidden</strong> - The request is understood but it has been refused</li>
+                <li><strong>404 Not Found</strong> - The requested resource could not be found</li>
+                <li><strong>405 Method Not Allowed</strong> - The requested method is not allowed for this resource</li>
+            </ul>
+            
+            <h3>Server Errors</h3>
+            <ul>
+                <li><strong>500 Internal Server Error</strong> - Something went wrong on the server</li>
+                <li><strong>502 Bad Gateway</strong> - The server received an invalid response from the upstream server</li>
+                <li><strong>503 Service Unavailable</strong> - The server is currently unavailable</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CIT 281 Project 4 - RESTful API</p>
+        </div>
+    </footer>
+</body>
+</html>
